@@ -26,10 +26,10 @@
                       foreach ($districts as $dis) {
                     ?>
                     <tr>
-                        <td class="center"><?php echo $dis->district; ?></td>
+                        <td class="center"><?php echo $dis->COLLEGE; ?></td>
                         <td class="center">
                             <?php
-                            if ($dis->dis_status == 1) { ?>
+                            if ($dis->status == 1) { ?>
                                 <span class="label label-success">Active</span>
                             <?php }
                             else { ?>
@@ -37,10 +37,10 @@
                            <?php } ?>
                         </td>
                         <td class="center">
-                            <a class="btn btn-info" href="districts/edit/<?php echo $dis->district_id; ?>" title="Edit">
+                            <a class="btn btn-info" href="districts/edit/<?php echo $dis->ID; ?>" title="Edit">
                                         <i class="halflings-icon white edit"></i>
                             </a>
-                            <a class="btn btn-danger" href="districts/delete/<?php echo $dis->district_id;?>" title="Delete" onclick="return confirm('Are you sure want to delete this Districts?')">
+                            <a class="btn btn-danger" href="districts/delete/<?php echo $dis->ID;?>" title="Delete" onclick="return confirm('Are you sure want to delete this Districts?')">
                                 <i class="halflings-icon white trash"></i>
                             </a>
                         </td>

@@ -21,8 +21,8 @@
             <li><a href="<?php echo base_url();?>index.php/banerads"><i class="icon-tasks"></i><span class="hidden-tablet">Baner Ads</span></a></li>
             
             <li class="active1"><a href="<?php echo base_url();?>index.php/admin/home"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Web Settings</span></a></li>
-           <!-- <li><a href="<?php echo base_url();?>index.php/districts"><i class="icon-tasks"></i><span class="hidden-tablet">School Name</span></a></li>
-            <li><a href="<?php echo base_url();?>index.php/area"><i class="icon-tasks"></i><span class="hidden-tablet">School Area</span></a></li>-->
+            <li><a href="<?php echo base_url();?>index.php/districts"><i class="icon-tasks"></i><span class="hidden-tablet">School Name</span></a></li>
+           <!-- <li><a href="<?php echo base_url();?>index.php/area"><i class="icon-tasks"></i><span class="hidden-tablet">School Area</span></a></li>-->
             <li><a href="<?php echo base_url();?>index.php/pages"><i class="icon-tasks"></i><span class="hidden-tablet">Pages</span></a></li>
             <li><a href="<?php echo base_url();?>index.php/users"><i class="icon-tasks"></i><span class="hidden-tablet">Users</span></a></li>
             <li><a href="<?php echo base_url();?>index.php/profile"><i class="icon-tasks"></i><span class="hidden-tablet">Profile Settings</span></a></li>

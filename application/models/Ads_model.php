@@ -158,10 +158,10 @@ class Ads_model extends CI_Model {
     }
 
     public function add_districts_temp($data) {
-        $this->db->insert('districts_temp', $data);
+     //   $this->db->insert('districts_temp', $data);
     }
     public function add_districts_temp_classified($data) {
-        $this->db->insert('districts_temp_classified', $data);
+//        $this->db->insert('districts_temp_classified', $data);
     }
 
     public function getAlldistricts(){
@@ -409,39 +409,23 @@ class Ads_model extends CI_Model {
 	}
 
     public function delete_cat_temp_classified() {
-        $this->db->query('DELETE FROM `cat_temp_classified`');
+      //  $this->db->query('DELETE FROM `cat_temp_classified`');
     }
     public function add_cat_temp_classified($data) {
         //$this->db->query('DELETE FROM `cat_temp`');
-        $this->db->insert('cat_temp_classified', $data);
+       // $this->db->insert('cat_temp_classified', $data);
     }
 
-    public function getAllCat_classified(){
-        $this->db->order_by('count', 'DESC');
-        $query = $this->db->get('cat_temp_classified');
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        } else {
-            return false;
-        }
-    }
+    public function getAllCat_classified(){}
 
     public function delete_sub_cat_temp_classified() {
-        $this->db->query('DELETE FROM `sub_category_temp_classified`');
+       // $this->db->query('DELETE FROM `sub_category_temp_classified`');
     }
     public function add_sub_cat_temp_classified($data) {
-        $this->db->insert('sub_category_temp_classified', $data);
+       // $this->db->insert('sub_category_temp_classified', $data);
     }
 
-    public function getAllsub_cat_classified(){
-        $this->db->order_by('count', 'DESC');
-        $query = $this->db->get('sub_category_temp_classified');
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        } else {
-            return false;
-        }
-    }
+    public function getAllsub_cat_classified(){}
 
     public function addReview($data){
         $this->db->insert('review', $data);

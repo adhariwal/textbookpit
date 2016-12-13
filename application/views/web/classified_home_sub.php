@@ -124,7 +124,7 @@
 
                                 }else{
                                 ?><a class="thumbnail pull-left" href="<?php echo $url; ?>">
-                              <img class="media-object w100" src="<?php echo base_url().$ads->img_1; ?>" /></a>
+                              <img class="media-object w100" style="max-height: 180px;" src="<?php echo base_url().$ads->img_1; ?>" /></a>
                             <?php
                                 }
                                 ?>

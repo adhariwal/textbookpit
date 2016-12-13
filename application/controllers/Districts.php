@@ -14,7 +14,7 @@ class Districts extends CI_Controller{
     }
 
     public function index(){
-            $data['districts']=$this->districts_model->getAll('district','asc');
+            $data['districts']=$this->districts_model->getAll('COLLEGE','asc');
             $this->load->view('admin/districts/index',$data);
             $this->load->view('admin/footer');
     }
@@ -53,9 +53,9 @@ class Districts extends CI_Controller{
                 if($result){
                     foreach ($result as $row) {
                     $data = array(
-                    'district_id' => $row->district_id,
-                    'district' => $row->district,
-                    'dis_status' => $row->dis_status,
+                    'district_id' => $row->ID,
+                    'district' => $row->COLLEGE,
+                    'dis_status' => $row->status,
                     'btn_back'=> base_url().'index.php/districts'
                 );
             }
@@ -73,9 +73,9 @@ class Districts extends CI_Controller{
                     if ($this->form_validation->run() == FALSE) {
                     foreach ($result as $row) {
                         $data = array(
-                            'district_id' => $row->district_id,
-                            'district' => $row->district,
-                            'dis_status' => $row->dis_status,
+                            'district_id' => $row->ID,
+                    'district' => $row->COLLEGE,
+                    'dis_status' => $row->status,
                             'btn_back'=> base_url().'index.php/districts'
                         );
                     }

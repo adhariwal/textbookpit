@@ -35,7 +35,18 @@
                           <div class="control-group">
                         <label class="control-label" for="focusedInput">School Name *</label>
                         <div class="controls">
-                          <input type="text" name="school_name" id="school_name"  class="input-xlarge focused" value="<?php if(isset($massage))echo set_value('');else echo set_value('school_name'); ?>">                          
+                          
+                          
+                          
+                             <select name="school_name" id="school_name" >
+                              
+                                <?php
+                                if($districts){
+                                foreach ($districts as $district) {
+                                ?>
+                                <option value="<?php echo $district->ID; ?>" ><?php echo $district->COLLEGE; ?></option>
+                                <?php }} ?>
+                            </select>                      
                         </div>
                       </div>
                       <div class="control-group">
