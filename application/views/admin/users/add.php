@@ -27,7 +27,9 @@
                         echo validation_errors('<div class="alert alert-error">', '</div>');
                      ?>
                     </h2></div>
-                    <?php echo form_open('users/addUser', array('class'=>'form-horizontal'))?>
+					  <?php echo form_open('users/addUser', array('class'=>'form-horizontal'))?>
+					
+                 
                     <fieldset>
                       <div class="control-group">
                         <label class="control-label" for="focusedInput">Name *</label>
@@ -63,7 +65,7 @@
                         </div>
                         </div>
                       <div class="form-actions">
-                        <button type="submit" class="btn btn-primary" id="save" disabled>Save changes</button>
+                         <button type="submit" class="btn btn-primary" id="save">Save changes</button>
                         <button type="reset" class="btn">Reset</button>
                         <button type="button" class="btn btn-warning" onclick="window.location.href='<?php echo $btn_back;?>'">Back</button>
                       </div>

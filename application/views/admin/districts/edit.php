@@ -24,17 +24,17 @@
                         echo validation_errors('<div class="alert alert-error">', '</div>');
                      ?>
                     </h2></div>
-                    <?php echo form_open('districts/editDistricts/'.$district_id, array('class'=>'form-horizontal'))?>
+                    <?php echo form_open_multipart('districts/editDistricts/'.$district_id, array('class'=>'form-horizontal'))?>
                     <fieldset>
                     <input type="hidden" name="district_id" id="district_id" value="<?php echo $district_id?>">
                       <div class="control-group">
-                        <label class="control-label" for="focusedInput">District *</label>
+                        <label class="control-label" for="focusedInput">School *</label>
                         <div class="controls">
                             <input type="text" name="district" id="district" class="input-xlarge focused" value="<?php echo $district;?>">
                         </div>
                       </div>
                       <div class="control-group">
-                        <label class="control-label" for="focusedInput">District Status *</label>
+                        <label class="control-label" for="focusedInput">School Status *</label>
                         <div class="controls">
                             <select id="status" name="status" data-rel="chosen1">
                                 <?php if ($dis_status == 1) {?>
@@ -47,6 +47,19 @@
                             </select>
                         </div>
                         </div>
+                         <div class="control-group">
+                        <label class="control-label" for="focusedInput">Change Image 1</label>
+                        <div class="controls">
+                            <?php
+                            if($img_1 !='no'){
+                                ?>
+                                <img src="<?php echo base_url().$img_1; ?>" width="200" height="200">
+                            <?php
+                            }
+                            ?>
+                          <input type="file" name='img_1' id="img_1" value="">
+                        </div>
+                      </div>
                       <div class="form-actions">
                         <button type="submit" class="btn btn-primary" id="save">Save changes</button>
                         <button type="reset" class="btn">Reset</button>

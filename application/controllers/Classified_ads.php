@@ -71,6 +71,10 @@ private $limit = 25;
         if ($query->num_rows() > 0) {
 
             foreach ($query->result() as $row) {
+$query1=$this->db->query("SELECT * FROM colleges where ID='".$row->school_name."'");
+$datasss=$query1->result();
+
+$row->school_imag=$datasss[0]->img_1;
 
                 $data[]= $row;
 
@@ -577,7 +581,7 @@ public function search_module(){
 	$search=$_GET['s'];
 	
 	$data='<div class="list-subgroups">';
-	 $query=$this->db->query("SELECT * FROM colleges where COLLEGE like '".$search."%' LIMIT 0 , 10");
+	 $query=$this->db->query("SELECT * FROM colleges where status='1' and  COLLEGE like '".$search."%' LIMIT 0 , 10");
 
 	 foreach ($query->result() as $row) {
 		   $on="put_data_in('".$row->COLLEGE."','".$row->ID."')";
@@ -587,8 +591,6 @@ public function search_module(){
 			echo $data;
 	
 }
-
-
 public function search_module1(){
 	if(!isset($_GET['s'])){
 		$_GET['s']='';
@@ -596,11 +598,29 @@ public function search_module1(){
 	$search=$_GET['s'];
 	
 	$data='<div class="list-subgroups">';
-	 $query=$this->db->query("SELECT * FROM classified_category t1 , classified_sub_category t2 where t1.cat_id=t2.cat_id and  t1.category like '".$search."%' LIMIT 0 , 10");
+	 $query=$this->db->query("SELECT * FROM classified_category t1 , classified_sub_category t2 where t1.cat_id=t2.cat_id and t1.cat_status='1' and t2.sub_cat_status='1' and  t1.category like '".$search."%' LIMIT 0 , 10");
 
 	 foreach ($query->result() as $row) {
-		   $on="put_data_in1('".$row->sub_category."','".$row->sub_cat_id."')";
+		   $on="put_data_in1('".$row->sub_category."','".$row->sub_cat_id."','".$row->cat_id."')";
                 $data .= '<a class="list-subgroup-item"  onclick="'.$on.'">'.$row->sub_category.'</a>';
+            }
+			 $data .='</div>';
+			echo $data;
+	
+}
+
+public function search_module2(){
+	if(!isset($_GET['s'])){
+		$_GET['s']='';
+		}
+	$search=$_GET['s'];
+	
+	$data='<div class="list-subgroups">';
+	 $query=$this->db->query("SELECT * FROM `classified_ads`  where   title like '".$search."%' LIMIT 0 , 15");
+
+	 foreach ($query->result() as $row) {
+		   $on="put_data_in2('".$row->title."')";
+                $data .= '<a class="list-subgroup-item"  onclick="'.$on.'">'.$row->title.'</a>';
             }
 			 $data .='</div>';
 			echo $data;
@@ -619,7 +639,7 @@ public function search_module1(){
 
         $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
 
-    	$limit = 25;
+    	$limit = 10;
 
     	$startpoint = ($page * $limit) - $limit;
 
@@ -752,7 +772,10 @@ public function search_module1(){
         if ($query->num_rows() > 0) {
 
             foreach ($query->result() as $row) {
+$query1=$this->db->query("SELECT * FROM colleges where ID='".$row->school_name."'");
+$datasss=$query1->result();
 
+$row->school_imag=$datasss[0]->img_1;
                 $data[]= $row;
 
             }
@@ -775,7 +798,7 @@ public function search_module1(){
 
         $data['page']=$page;
 
-
+ $data['url_final']=$url;
 
         $data['pagination']=$this->pagination($statement,$limit,$page,$url);
 

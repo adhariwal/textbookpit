@@ -3,7 +3,103 @@
 <div class="col-lg-12">
   <ol class="breadcrumb">
   </ol>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+ <script>
+ function showResult(str) {
+  if (str.length==0) { 
+    document.getElementById("livesearch").innerHTML="";
+    document.getElementById("livesearch").style.border="0px";
+    return;
+  }
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {  // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("livesearch").innerHTML=this.responseText;
+	  
+      document.getElementById("livesearch").style.border="1px solid #A5ACB2";
+    }
+  }
+  xmlhttp.open("GET","../../index.php/classified_ads/search_module/?s="+str,true);
+  xmlhttp.send();
+  
+  
+  
+  
+  
+  
+}
+
+function showResult1(str) {
+  if (str.length==0) { 
+    document.getElementById("livesearch1").innerHTML="";
+    document.getElementById("livesearch1").style.border="0px";
+    return;
+  }
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {  // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("livesearch1").innerHTML=this.responseText;
+	  
+      document.getElementById("livesearch1").style.border="1px solid #A5ACB2";
+    }
+  }
+  xmlhttp.open("GET","../../index.php/classified_ads/search_module1/?s="+str,true);
+  xmlhttp.send();
  
+}
+function showResult2(str) {
+  if (str.length==0) { 
+    document.getElementById("livesearch2").innerHTML="";
+    document.getElementById("livesearch2").style.border="0px";
+    return;
+  }
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {  // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("livesearch2").innerHTML=this.responseText;
+	  
+      document.getElementById("livesearch2").style.border="1px solid #A5ACB2";
+    }
+  }
+  xmlhttp.open("GET","../../index.php/classified_ads/search_module2/?s="+str,true);
+  xmlhttp.send();
+ 
+}
+
+function put_data_in2(val){
+	
+	document.getElementById('title').value=val;
+	
+	document.getElementById("livesearch2").innerHTML='';
+	}
+function put_data_in1(val,id,ca){
+	document.getElementById('subcatid').value=id;
+		document.getElementById('subcatid121').value=val;
+		document.getElementById('selectCategory').value=ca;
+		document.getElementById("livesearch1").innerHTML='';
+	}
+function put_data_in(val,id){
+	document.getElementById('catid').value=id;
+	document.getElementById('catid121').value=val;
+	
+	document.getElementById("livesearch").innerHTML='';
+	}
+ </script>
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
     <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet porta eros, eget facilisis arcu. Duis condimentum fermentum enim, ac rutrum erat venenatis vel. Morbi pharetra viverra faucibus.</p>-->
@@ -17,39 +113,37 @@
                     </h4></div>
           <?php echo form_open_multipart('webdetails/postAd')?>
             <div class="panel panel-info">
+			
+			<script src='https://www.google.com/recaptcha/api.js'></script>
               <div class="panel-heading">
                 <h3 class="panel-title">Classified sections</h3>
               </div>
               <div class="panel-body">
               <div class="form-group">
                   <label for="userName">Book Name *</label>
-                  <input type="text" class="form-control" name="title" id="title" value="<?php if(isset($massage))echo set_value('');else echo set_value('title'); ?>" required>
+                  <input type="text" class="form-control" name="title" onkeyup="showResult2(this.value)" id="title" value="<?php if(isset($massage))echo set_value('');else echo set_value('title'); ?>" placeholder="Book Name" autocomplete="off" required="required">
+                  <div class="s-result" id="livesearch2"></div>
                   <?php //echo form_error('title','<div class="alert alert-error">', '</div>'); ?>
                 </div>
                  <div class="form-group">
                   <label for="userName">School Name *</label>
-                  <input type="text" class="form-control" name="school_name" id="title" value="<?php if(isset($massage))echo set_value('');else echo set_value('school_name'); ?>" required>
+                <input type="hidden" name="school_name" id="catid" value="" required="required">
+                <input type="hidden" value="" name="selectCategory" id="selectCategory" />
+                <input type="hidden" value="" name="selectSubCategory" id="subcatid" />
+                <input class="form-control " autocomplete="off" type="search" id="catid121" name="collage" onkeyup="showResult(this.value)" placeholder="Search with school Name">
+<div class="s-result" id="livesearch"></div>
                   <?php //echo form_error('title','<div class="alert alert-error">', '</div>'); ?>
                 </div>
-                  <div class="form-group">
+                  <!--<div class="form-group">
                   <label for="userName">ISBN Number *</label>
                   <input type="text" class="form-control" name="isbn" id="title" value="<?php if(isset($massage))echo set_value('');else echo set_value('isbn'); ?>" required>
                   <?php //echo form_error('title','<div class="alert alert-error">', '</div>'); ?>
-                </div>
+                </div>-->
+               
                 <div class="form-group">
-                  <label for="section1">Category *</label>
-                  <select name="selectCategory" id="selectCategory" class="form-control" onchange="getSubCat();" required>
-                      <option value="">Select One</option>
-                      <?php
-                      if($categories){
-                      foreach ($categories as $cat) {
-                      ?>
-                      <option value="<?php echo $cat->cat_id; ?>"<?php echo set_select('selectCategory',$cat->cat_id,FALSE)?>><?php echo $cat->category; ?></option>
-                      <?php }} ?>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="section1">Sub Category *</label>
+                  <label for="section1">Course By Course Id</label>
+                  <input class="form-control " autocomplete="off" type="search" id="subcatid121" name="subcategory" onkeyup="showResult1(this.value)" placeholder="Search with Course Id">
+<div class="s-result" id="livesearch1"></div>
                   <div id="subcat">
                         </div>
                 </div>
@@ -139,7 +233,7 @@
                 </div>-->
                 <div class="form-group">
                   <label for="userPhone">Phone *</label>
-                  <input type="number" class="form-control" name="phone" id="phone" value="<?php if(isset($massage))echo set_value('');else echo set_value('phone'); ?>" required>
+                  <input type="text" class="form-control" name="phone" id="phone" value="<?php if(isset($massage))echo set_value('');else echo set_value('phone'); ?>" required>
                 </div>
                 <div class="form-group">
                   <label for="userEmail">E-mail *</label>
@@ -153,6 +247,10 @@
                   </div>
               </div>
             </div>
+			
+			
+				 <div class="g-recaptcha" data-sitekey="6LdoZRUUAAAAADiZ9yxg66OyZbukSBAZuy3_x5M1"></div>
+
             <div class="well">
               <p>By posting this ad, you agree to the Terms & Conditions of this site.</p>
               <button type="submit" class="btn btn-danger" id="save">Post Ad</button>
@@ -163,35 +261,4 @@
   </div>
 </div>
 
-<script>
-    function getSubCat(){
-        var id=$('#selectCategory').val();
-        // var cct = $("input[name=csrf_token_name]").val();
-        $.ajax({
-        type: "POST",
-        url: "<?php echo base_url(); ?>index.php/areafront/getSubCatByCatId_front",
-        dataType: 'html',
-        data: {'id': id, <?php echo $this->security->get_csrf_token_name(); ?>: '<?php echo $this->security->get_csrf_hash(); ?>'},
-        //data: {'id': id},
-        success: function(data) {
-            $('#subcat').html(data);
-        }
-    });
-}
-</script>
 
-<script>
-    function getArea(){
-        var id=$('#selectDis').val();
-        // var cct = $("input[name=csrf_token_name]").val();
-        $.ajax({
-        type: "POST",
-        url: "<?php echo base_url(); ?>index.php/areafront/getAreaByDisId_front",
-        dataType: 'html',
-        data: {'id': id, <?php echo $this->security->get_csrf_token_name(); ?>: '<?php echo $this->security->get_csrf_hash(); ?>'},
-        success: function(data) {
-            $('#area').html(data);
-        }
-    });
-}
-</script>

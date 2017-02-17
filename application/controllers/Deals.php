@@ -14,9 +14,9 @@ class Deals extends CI_Controller {
           'upload_path'     => "./uploads/deals/",
           'allowed_types'   => "gif|jpg|png|jpeg",
           'overwrite'       => TRUE,
-          'max_size'        => "2000",
-          'max_height'      => "2024",
-          'max_width'       => "2024"
+          'max_size'        => "4000",
+          'max_height'      => "4024",
+          'max_width'       => "4024"
         );
         $this->load->library('upload', $config);
         $this->load->library('image_lib');

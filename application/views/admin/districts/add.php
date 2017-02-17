@@ -24,12 +24,18 @@
                         echo validation_errors('<div class="alert alert-error">', '</div>');
                      ?>
                     </h2></div>
-                    <?php echo form_open('districts/addDistricts', array('class'=>'form-horizontal'))?>
+                    <?php echo form_open_multipart('districts/addDistricts', array('class'=>'form-horizontal'))?>
                     <fieldset>
                       <div class="control-group">
                         <label class="control-label" for="focusedInput">District *</label>
                         <div class="controls">
                             <input type="text" name="district" id="district" class="input-xlarge focused" value="<?php if(isset($massage))echo set_value('');else echo set_value('district'); ?>">
+                        </div>
+                      </div>
+                      <div class="control-group">
+                        <label class="control-label" for="focusedInput"> Image </label>
+                        <div class="controls">
+                          <input type="file" name='img_1' id="img_1" value="">
                         </div>
                       </div>
                       <div class="form-actions">

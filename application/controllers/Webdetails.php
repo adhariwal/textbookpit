@@ -20,9 +20,9 @@ class Webdetails extends CI_Controller{
           'upload_path'     => "./uploads/ads/",
           'allowed_types'   => "gif|jpg|png|jpeg",
           'overwrite'       => TRUE,
-          'max_size'        => "1000",
-          'max_height'      => "1024",
-          'max_width'       => "1024"
+          'max_size'        => "4000",
+          'max_height'      => "4024",
+          'max_width'       => "4024"
         );
         $this->load->library('upload', $config);
         $this->load->library('image_lib');
@@ -88,37 +88,42 @@ class Webdetails extends CI_Controller{
         $cus_name=$this->db->escape_str($this->input->post('name'));
         $cus_email=$this->db->escape_str($this->input->post('email'));
         $cus_phone=$this->db->escape_str($this->input->post('phone'));
-        $cus_msg='takas.artifectx.com<br><br>'.
-                 'The customer contact you, regarding your ad -'.$this->db->escape_str($this->input->post('subject')).' on takas.artifectx.com<br><br>'.
+        $cus_msg='takas.Textbookpit.com<br><br>'.
+                 'The customer contact you, regarding your ad -'.$this->db->escape_str($this->input->post('subject')).' on takas.Textbookpit.com<br><br>'.
                  'Customer Details<br><br>'.
                  'Customer Name -'.$cus_name.'<br>'.
                  'Customer E-mail -'.$cus_email.'<br>'.
                  'Customer Phone -'.$cus_phone.'<br>'.
                  'Customer message -'.$this->db->escape_str($this->input->post('message')).
                  '<br><br>------------------------------------------------------------------------------------'.
-                    '<br>Thank you for posting on your ad on takas.artifectx.com'.
-                    '<br>takas.artifectx.com,'.
+                    '<br>Thank you for posting on your ad on takas.Textbookpit.com'.
+                    '<br>takas.Textbookpit.com,'.
                     '<br>Takas-Classified team'.
-                    '<br>takas.artifectx.com'.
-                    '<br><br>Need help please contact us - info@artifectx.com'.
-                    '<br><br>takas.artifectx.com - Premier Online Business Directory & Classified site.'.
+                    '<br>takas.Textbookpit.com'.
+                    '<br><br>Need help please contact us - info@Textbookpit.com'.
+                    '<br><br>takas.Textbookpit.com - Premier Online Business Directory & Classified site.'.
                     '<br><br>Follow us on Facebook: https://www.facebook.com/artifectx'.
                     '<br>Tweet us on twitter: https://twitter.com/artifectx';
-        $sub='Regarding ad '.$this->db->escape_str($this->input->post('subject')).' post on takas.artifectx.com ';
+        $sub='Regarding ad '.$this->db->escape_str($this->input->post('subject')).' post on takas.Textbookpit.com ';
 
 
         $this->load->library('email');
         $this->email->clear();
         $config['mailtype'] = 'html';
         $this->email->initialize($config);
-        $this->email->from('info@artifectx.com', 'artifectx.com');
+        $this->email->from('info@Textbookpit.com', 'Textbookpit.com');
         $this->email->to($seller_email);
 
         $this->email->subject($sub);
         $this->email->message($cus_msg);
 
         $this->email->send();
-        redirect(base_url().'index.php/classified_ads/index');
+      redirect(base_url().'index.php/classified_ads/index?status=1');
+		
+		
+		
+		
+		
     }
 
     public function contactUs(){
@@ -149,12 +154,7 @@ class Webdetails extends CI_Controller{
     }
 
     public function post(){
-         $data=array(
-                'categories'=>$this->category_model->getAllClassifiedCategoryWithStatus(1),
-                'subcategories'=>$this->subcategory_model->getAllClassifiedSubcategoryWithStatus(1),
-                'districts'=>$this->districts_model->getAllWithStatus(1),
-                'areas'=>$this->area_model->getAllWithStatus(1)
-            );
+        
         $data['baners'] = $this->banerads_model->getAllWithStatus(1);
         $data['page_title'] ="Post Ad | ";
         $this->load->view('web/header',$data);
@@ -175,33 +175,30 @@ class Webdetails extends CI_Controller{
                     'description' =>$this->input->post('description'),
                     'price' => $this->db->escape_str($this->input->post('price')),
                     'cus_name' => $this->db->escape_str($this->input->post('customer')),
-					
-					'isbn' => $this->db->escape_str($this->input->post('isbn')),
+					 'school_name' => $this->db->escape_str($this->input->post('school_name')),
+					//'isbn' => $this->db->escape_str($this->input->post('isbn')),
                   //  'address' => $this->input->post('address'),
                     'email' => $this->db->escape_str($this->input->post('email')),
                     'phone' => $this->db->escape_str($this->input->post('phone')),
                     //'ad_type' => $this->db->escape_str($this->input->post('selectType')),
                     //'ad_cat' => $this->db->escape_str($this->input->post('selectCat')),
-                   'district_id' => $this->db->escape_str($this->input->post('selectDis')),
-                    'area_id' => $this->db->escape_str($this->input->post('selectArea')),
+                   'district_id' => '1',
+                    'area_id' => '1',
+					'ad_status'=>'1',
                     'date' =>date("F j, Y, g:i a"),
                     'email_status' =>$email_status
                 );
+				
+			
                 if ($_FILES['img_1']['name'] != ""){
                     $field_name1="img_1";
                     if($this->handle_upload($field_name1) == TRUE){
                         $data['img_1']=$this->handle_upload($field_name1);
                     }else {
                         $err.="invalid image";
-                        $data['categories']=$this->category_model->getAllClassifiedCategoryWithStatus(1);
-                        $data['subcategories']=$this->subcategory_model->getAllClassifiedSubcategoryWithStatus(1);
-                        $data['districts']=$this->districts_model->getAllWithStatus(1);
-                        $data['areas']=$this->area_model->getAllWithStatus(1);
+                       
                         $data = array(
-                        'categories'=>$this->category_model->getAllClassifiedCategoryWithStatus(1),
-                        'subcategories'=>$this->subcategory_model->getAllClassifiedSubcategoryWithStatus(1),
-                        'districts'=>$this->districts_model->getAllWithStatus(1),
-                        'areas'=>$this->area_model->getAllWithStatus(1),
+                       
                         'massage' => '<small><a  class="btn-advanced-search">You must upload a valid image & type.</a></small>'
                         );
                         $data['baners'] = $this->banerads_model->getAllWithStatus(1);
@@ -218,15 +215,9 @@ class Webdetails extends CI_Controller{
                         $data['img_2']=$this->handle_upload($field_name2);
                     }else {
                         $err.="invalid image";
-                        $data['categories']=$this->category_model->getAllClassifiedCategoryWithStatus(1);
-                        $data['subcategories']=$this->subcategory_model->getAllClassifiedSubcategoryWithStatus(1);
-                        $data['districts']=$this->districts_model->getAllWithStatus(1);
-                        $data['areas']=$this->area_model->getAllWithStatus(1);
+                       
                         $data = array(
-                        'categories'=>$this->category_model->getAllClassifiedCategoryWithStatus(1),
-                        'subcategories'=>$this->subcategory_model->getAllClassifiedSubcategoryWithStatus(1),
-                        'districts'=>$this->districts_model->getAllWithStatus(1),
-                        'areas'=>$this->area_model->getAllWithStatus(1),
+                       
                         'massage' => '<small><a  class="btn-advanced-search">You must upload a valid image & type.</a></small>'
                         );
                         $data['baners'] = $this->banerads_model->getAllWithStatus(1);
@@ -243,15 +234,9 @@ class Webdetails extends CI_Controller{
                         $data['img_3']=$this->handle_upload($field_name3);
                     }else {
                         $err.="invalid image";
-                        $data['categories']=$this->category_model->getAllClassifiedCategoryWithStatus(1);
-                        $data['subcategories']=$this->subcategory_model->getAllClassifiedSubcategoryWithStatus(1);
-                        $data['districts']=$this->districts_model->getAllWithStatus(1);
-                        $data['areas']=$this->area_model->getAllWithStatus(1);
+                       
                         $data = array(
-                        'categories'=>$this->category_model->getAllClassifiedCategoryWithStatus(1),
-                        'subcategories'=>$this->subcategory_model->getAllClassifiedSubcategoryWithStatus(1),
-                        'districts'=>$this->districts_model->getAllWithStatus(1),
-                        'areas'=>$this->area_model->getAllWithStatus(1),
+                      
                         'massage' => '<small><a  class="btn-advanced-search">You must upload a valid image & type.</a></small>'
                         );
                         $data['baners'] = $this->banerads_model->getAllWithStatus(1);
@@ -268,15 +253,9 @@ class Webdetails extends CI_Controller{
                         $data['img_4']=$this->handle_upload($field_name4);
                     }else {
                         $err.="invalid image";
-                        $data['categories']=$this->category_model->getAllClassifiedCategoryWithStatus(1);
-                        $data['subcategories']=$this->subcategory_model->getAllClassifiedSubcategoryWithStatus(1);
-                        $data['districts']=$this->districts_model->getAllWithStatus(1);
-                        $data['areas']=$this->area_model->getAllWithStatus(1);
+                       
                         $data = array(
-                        'categories'=>$this->category_model->getAllClassifiedCategoryWithStatus(1),
-                        'subcategories'=>$this->subcategory_model->getAllClassifiedSubcategoryWithStatus(1),
-                        'districts'=>$this->districts_model->getAllWithStatus(1),
-                        'areas'=>$this->area_model->getAllWithStatus(1),
+                        
                         'massage' => '<small><a  class="btn-advanced-search">You must upload a valid image & type.</a></small>'
                         );
                         $data['baners'] = $this->banerads_model->getAllWithStatus(1);
@@ -287,18 +266,14 @@ class Webdetails extends CI_Controller{
                     }
                 }else $data['img_4']="no";//$data['img_4']="uploads/ads/no_img4.jpg";
                 if(empty ($err)){
-                    $this->ads_model->addClassifiedAds($data);
-                    $data['categories']=$this->category_model->getAllClassifiedCategoryWithStatus(1);
-                    $data['subcategories']=$this->subcategory_model->getAllClassifiedSubcategoryWithStatus(1);
-                    $data['districts']=$this->districts_model->getAllWithStatus(1);
-                    $data['areas']=$this->area_model->getAllWithStatus(1);
+					
+			
+                   $inser= $this->ads_model->addClassifiedAds($data);
+                    
                     
                     $data=array(
-                    'categories'=>$this->category_model->getAllClassifiedCategoryWithStatus(1),
-                    'subcategories'=>$this->subcategory_model->getAllClassifiedSubcategoryWithStatus(1),
-                    'districts'=>$this->districts_model->getAllWithStatus(1),
-                    'areas'=>$this->area_model->getAllWithStatus(1),
-                    'massage'=>'<div class="alert alert-success">Your Ad Sucessfully posted.</div>'
+                   
+                    'massage'=>'<div class="alert alert-success">Your ad is pending. Please check your email to publish and manage your posting</div>'
                     );
 
                     $cus_email=$this->db->escape_str($this->input->post('email'));
@@ -313,25 +288,41 @@ class Webdetails extends CI_Controller{
 
                         }
                     }
-
+if($to==""){
+	$to='abhijeet@webcraft.co.in';
+	}
                     $sub='New Ad posting on TextBookPit.Com';
                     $msg='New Ad posting on TextBookPit.Com  from '."<br><br>Customer Name - ".$cus_name."<br>Customer phone - ".$cus_phone;
 
                     $this->send_mail_to_admin($cus_email,$cus_details,$to,$sub,$msg);
 
-                    $web_msg='Your ad sucessfully has submited to takas.artifectx.com classified web.<br>Please confirm your contact details before Publish your ad.<br><br>'.
+                    $web_msg='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>One Time Password</title>
+</head>
 
-                    '<br><br>Your ad will publish within 1 hour after review. Thank You. TextBookPit.Com'.
+<body><div style="text-align:center">
+<a href="'.base_url().'"><img src="'.base_url().'web_assest/img/logo.png" ></a>
+Your ad sucessfully has submited to takas.Textbookpit.com classified web.<br>Please confirm your contact details before Publish your ad.<br><br>'.
+
+                    'For manage your posting <a href="http://greatwebsusa.com/textbookpit/index.php/editpost/index?id='.$inser.'">click here ..</a><br><br>Your ad will publish within 1 hour after review. Thank You. TextBookPit.Com'.
                     '<br>-----------------------------------------------------------------------------------------------------------'.
-                    '<br>Thank you for posting on your ad on takas.artifectx.com'.
+                    '<br>Thank you for posting on your ad on takas.Textbookpit.com'.
                     '<br>Regards,'.
                     '<br>Takas-Classified team'.
-                    '<br>takas.artifectx.com'.
-                    '<br><br>Need help please contact us - info@artifectx.com'.
-                    '<br><br>takas.artifectx.com - Premier Online Business Directory & Classified site.'.
+                    '<br>takas.Textbookpit.com'.
+                    '<br><br>Need help please contact us - info@Textbookpit.com'.
+                    '<br><br>takas.Textbookpit.com - Premier Online Business Directory & Classified site.'.
                     '<br><br>Follow us on Facebook: https://www.facebook.com/artifectx'.
-                    '<br>Tweet us on twitter: https://twitter.com/artifectx';
-                    $this->send_mail_to_customer($to,$cus_email,$sub,$web_msg);
+                    '<br>Tweet us on twitter: https://twitter.com/artifectx
+					<a href="'.base_url().'">Textbookpit.com</a>
+</div>
+</body>
+</html>';
+					
+                   $this->send_mail_to_customer($to,$cus_email,$sub,$web_msg); 
                     
                         $data['baners'] = $this->banerads_model->getAllWithStatus(1);
                         $data['page_title'] ="Post Ad | ";
@@ -356,7 +347,7 @@ class Webdetails extends CI_Controller{
         $this->load->library('email');
         $config['mailtype'] = 'html';
         $this->email->initialize($config);
-        $this->email->from($from, 'Artifectx.com');
+        $this->email->from($from, 'Textbookpit.com');
         $this->email->to($to);
         $this->email->subject($sub);
         $this->email->message($msg);
@@ -376,7 +367,7 @@ class Webdetails extends CI_Controller{
             $image_config['maintain_ratio'] = FALSE;
             $image_config['width']         = 1024;
             $image_config['height']       = 768;
-
+          
             $image_config['wm_type'] = 'overlay';
             $image_config['wm_overlay_path'] = './uploads/watermark.png';//the overlay image
             $image_config['wm_opacity']=35;

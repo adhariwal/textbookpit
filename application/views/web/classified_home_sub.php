@@ -1,3 +1,10 @@
+  <?php if(isset($_GET['status'])){
+	 
+	 
+	 
+	 echo '<div class="alert alert-success">Your Message Sucessfully Sent.</div>'; }?>
+	 
+	 
 <div class="col-lg-8 col-sm-6 content-right">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <link href="<?php echo base_url() ?>css/owl.carousel.css" rel="stylesheet">
@@ -40,6 +47,8 @@
    </style>
 
 <hr />
+
+
 <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
  <div class="well">
         <form method="get" action="<?php echo base_url() ?>index.php/classified_ads/ads/">
@@ -71,13 +80,12 @@
 <div id="demo">
         
   <div id="owl-demo" class="owl-carousel">
-                
-                <div class="item"> <img src="<?php echo base_url();?>images/sc1.jpg" /> </div>
-                <div class="item"> <img src="<?php echo base_url();?>images/sc2.jpg" /> </div>
-                <div class="item"> <img src="<?php echo base_url();?>images/sc3.jpg" /> </div>
-                <div class="item"> <img src="<?php echo base_url();?>images/sc4.jpg" /> </div>
-                <div class="item"> <img src="<?php echo base_url();?>images/sc1.jpg" /> </div>
-                <div class="item"> <img src="<?php echo base_url();?>images/sc2.jpg" /> </div>
+                <?php  if ($ads != null) {
+					
+                    foreach ($ads as $ads12) { ?>
+                <div class="item"><a href="<?php echo base_url();?>index.php/classified_ads/ads/?school_name=<?php echo $ads12->school_name; ?>"> <img src="<?php echo base_url().$ads12->school_imag;?>" width="120" height="120" /> </a></div>
+                <?php } }?>
+               
                 
                  
               </div>
@@ -95,6 +103,8 @@
 </div>
 
           <ol class="breadcrumb">
+		  
+		 
             <li><a href="<?php echo base_url();?>">Home</a></li>
             <li><a href="<?php echo base_url();?>index.php/classified_ads/index">Classified Ads</a></li>
           </ol>
@@ -117,13 +127,13 @@
                             $url= base_url().'index.php/classified_ads/details/'.preg_replace("![^a-z0-9]+!i", "-", $ads->ads_id.' '.$ads->title);
                             ?>
                           <div class="media" style="cursor: pointer;" onclick="window.location.href='<?php echo $url; ?>'">
-                          <div class="xx12 col-md-4 col-xs-4 col-sm-12">
+                          <div class="xx12 col-md-4 col-xs-2 col-sm-12">
                             
                                 <?php
                                 if($ads->img_1=='no'){
 
                                 }else{
-                                ?><a class="thumbnail pull-left" href="<?php echo $url; ?>">
+                                ?><a class="thumbnail pull-left"  href="<?php echo $url; ?>">
                               <img class="media-object w100" style="max-height: 180px;" src="<?php echo base_url().$ads->img_1; ?>" /></a>
                             <?php
                                 }
@@ -131,9 +141,10 @@
                                     
                                     <div class="clearfix"></div>
                                     </div>
-                                    <div class="xx12 col-md-8 col-sm-12 col-xs-8 ">
+                                    <div class="xx12 col-md-6 col-sm-12 col-xs-8 ">
                             <div class="media-body">
                               <h4 class="media-heading"><a href="<?php echo $url; ?>" > <?php echo $ads->title; ?></a></h4> 
+							 <P>ISBN No: <?php echo $ads->isbn; ?></P>
                              <P>Author: <?php echo $ads->cus_name; ?></P>
                              <P>Date: <?php echo $ads->date; ?></P>
                               <P>Price: <strong><?php if($ads->price)echo 'USD '.$ads->price; ?></strong></P>
@@ -146,6 +157,15 @@ echo substr(strip_tags($ads->description),0,50).'....';
                               <!--<h5 class="media-heading"><a href="<?php echo $url; ?>"> <?php if($ads->price)echo 'USD '.$ads->price; ?></a></h5>-->
                             </div>
                              </div>
+                                  <div class="xx12 col-md-2 col-xs-2 col-sm-12">
+                            <?php if($ads->school_imag!=""){ ?>
+                              <a class="thumbnail pull-left"  href="<?php echo base_url();?>index.php/classified_ads/ads/?school_name=<?php echo $ads->school_name; ?>" style="margin-top: 50%;">
+                              <img class="media-object w100" style="max-height: 180px;" src="<?php echo base_url().$ads->school_imag; ?>" /></a>
+                           
+                                    
+                                    <div class="clearfix"></div>
+                                    <?php }?>
+                                    </div>
                           </div>
                            
                         </td>
@@ -160,7 +180,9 @@ echo substr(strip_tags($ads->description),0,50).'....';
              
               </table>
               
-              
+               <div class="col-lg-12" style="text-align: center;">
+              <?php echo $pagination;?>
+            </div>
               <?php if((isset($_GET['s']) || isset($_GET['isbn']))){
             ?>
             <div id="livesearch"><table class=" list-detail "><tbody id="livesearch"><tr><td><img src="<?php echo base_url();?>images/1445974136-loading.gif" /></td></tr></tbody></table></div>
@@ -168,9 +190,7 @@ echo substr(strip_tags($ads->description),0,50).'....';
               </table>
               
             </div>
-            <div class="col-lg-12" style="text-align: center;">
-              <?php echo $pagination;?>
-            </div>
+           
           </div>
         </div><form id="filter_form">               
              <textarea name="main_url" id="main_url" style="display:none;" ></textarea>   
@@ -532,7 +552,7 @@ unsignedUrl=unsignedUrl+'&ItemId=<?php  echo $_GET['isbn']; ?>';
 	autoPlay: 3000,
 	navigation: false,
 	navigationText: ['<i class="fa fa-chevron-left fa-5x"></i>', '<i class="fa fa-chevron-right fa-5x"></i>'],
-	pagination: false,
+	pagination: true,
 	   
     itemsCustom : false,
     itemsDesktop : [1199,2],

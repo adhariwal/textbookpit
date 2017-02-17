@@ -238,9 +238,22 @@ class Ads_model extends CI_Model {
 
     //classified ads
 
+public function editpost_email_id($id){
+	   $this->db->where('ads_id', $id);
+         $query = $this->db->get('ads');
+		return $query->result();
+	}
+
     public function addClassifiedAds($data) {
+	
         $this->db->insert('classified_ads', $data);
         $this->db->limit(1);
+		
+/*		$this->db->query("INSERT INTO `classified_ads`( `cat_id`, `sub_cat_id`, `title`, `description`, `img_1`, `img_2`, `img_3`, `img_4`, `user_id`, `ad_status`, `cus_name`, `isbn`, `school_name`, `address`, `email`, `phone`, `ad_type`, `ad_cat`, `district_id`, `area_id`, `price`, `date`, `email_status`) VALUES ('".$data['cat_id']."','".$data['sub_cat_id']."','".$data['title']."','".$data['description']."','".$data['img_1']."','".$data['img_2']."','".$data['img_3']."','".$data['img_4']."','1','','".$data['cus_name']."','','".$data['school_name']."','','".$data['email']."','".$data['phone']."','Sell','1','".$data['district_id']."','".$data['area_id']."','".$data['price']."','".$data['date']."','".$data['email_status']."')");*/
+		
+		$insert_id = $this->db->insert_id();
+
+   return  $insert_id;
     }
 
     public function editClassifiedAds($id, $data) {
@@ -259,8 +272,7 @@ class Ads_model extends CI_Model {
         $this->db->order_by($order_field, $order_type);
         $this->db->join('classified_category','classified_ads.cat_id=classified_category.cat_id');
         $this->db->join('classified_sub_category','classified_ads.sub_cat_id=classified_sub_category.sub_cat_id');
-        $this->db->join('districts','classified_ads.district_id=districts.district_id');
-        $this->db->join('area','classified_ads.area_id=area.area_id');
+      
         $query = $this->db->get('classified_ads');
         if ($query->num_rows() > 0) {
             return $query->result();
@@ -292,8 +304,7 @@ class Ads_model extends CI_Model {
         $this->db->where('classified_ads.ads_id', $id);
         $this->db->join('classified_category','classified_ads.cat_id=classified_category.cat_id');
         $this->db->join('classified_sub_category','classified_ads.sub_cat_id=classified_sub_category.sub_cat_id');
-        $this->db->join('districts','classified_ads.district_id=districts.district_id');
-        $this->db->join('area','classified_ads.area_id=area.area_id');
+      
 
         $this->db->limit(1);
         $query = $this->db->get('classified_ads');

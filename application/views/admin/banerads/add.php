@@ -30,7 +30,7 @@
                         <label class="control-label" for="focusedInput">URL </label>
                         <div class="controls">
                           <input type="text" name="web_url" id="web_url" class="input-xlarge focused" value="<?php if(isset($massage))echo set_value('');else echo set_value('web_url'); ?>">
-                          (Like - www.artifectx.com)
+                          (Like - www.Textbookpit.com)
                         </div>
                       </div>
                       <div class="control-group">

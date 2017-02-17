@@ -1,9 +1,9 @@
 <div class="col-lg-2 content-right" >
-          <ol class="breadcrumb">
+          <ol class="breadcrumb" style="padding: 1px 15px;">
 <li><a href="<?php echo base_url();?>">Home</a></li>
            
           </ol>
-          <h5>&nbsp;&nbsp;<a href="<?php echo base_url(); ?>index.php/webdetails/post" class="btn btn-danger">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post Ad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></h5>
+         
 
           <div class="row classifieds-table" id="right">
             <div class="col-lg-16">

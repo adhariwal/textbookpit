@@ -201,20 +201,33 @@ class Classifiedads extends CI_Controller {
 
                         }
                     }
-                    $sub='New Ad posting on takas.artifectx.com';
-                    $msg='New Ad posting on takas.artifectx.com from '."<br><br>Customer Name - ".$cus_name."<br>Customer phone - ".$cus_phone;
+                    $sub='New Ad posting on takas.Textbookpit.com';
+                    $msg='New Ad posting on takas.Textbookpit.com from '."<br><br>Customer Name - ".$cus_name."<br>Customer phone - ".$cus_phone;
 
                     $this->send_mail_to_admin($cus_email,$cus_details,$to,$sub,$msg);
                     
 
-                    $web_msg='Your ad sucessfully has submited to takas.artifectx.com classified web.<br>'.
-                                       '<br><br>Your ad will publish within 1 hour after review. Thank You. takas.artifectx.com'.
+                    $web_msg='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>One Time Password</title>
+</head>
+
+<body><div style="text-align:center">
+<a href="'.base_url().'"><img src="'.base_url().'web_assest/img/logo.png" ></a>
+Your ad sucessfully has submited to takas.Textbookpit.com classified web.<br>'.
+                                       '<br><br>Your ad will publish within 1 hour after review. Thank You. takas.Textbookpit.com'.
                     '<br>-----------------------------------------------------------------------------------------------------------'.
-                    '<br>Thank you for posting on your ad on takas.artifectx.com'.
+                    '<br>Thank you for posting on your ad on takas.Textbookpit.com'.
                     '<br>Regards,'.
-                    '<br>takas.artifectx.com team'.
-                    '<br>takas.artifectx.com'.
-                    '<br><br>Need help please contact us - info@artifectx.com';
+                    '<br>takas.Textbookpit.com team'.
+                    '<br>takas.Textbookpit.com'.
+                    '<br><br>Need help please contact us - info@Textbookpit.com
+<a href="'.base_url().'">Textbookpit.com</a>
+</div>
+</body>
+</html>';
 
                     $this->send_mail_to_customer($to,$cus_email,$sub,$web_msg);
 
@@ -459,7 +472,7 @@ class Classifiedads extends CI_Controller {
             $image_config['width']         = 1024;
             $image_config['height']       = 768;
 
-            /*$image_config['wm_text'] = 'Powered by Takas-Classifieds by Artifectx.com';
+            /*$image_config['wm_text'] = 'Powered by Takas-Classifieds by Textbookpit.com';
             $image_config['wm_type'] = 'text';
             $image_config['wm_font_size']	= '30';
             $image_config['wm_font_color'] = '000000';

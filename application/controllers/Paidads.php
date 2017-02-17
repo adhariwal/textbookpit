@@ -14,9 +14,9 @@ class Paidads extends CI_Controller {
           'upload_path'     => "./uploads/paidads/",
           'allowed_types'   => "gif|jpg|png|jpeg",
           'overwrite'       => TRUE,
-          'max_size'        => "1000",
-          'max_height'      => "1024",
-          'max_width'       => "1024"
+          'max_size'        => "4000",
+          'max_height'      => "4024",
+          'max_width'       => "4024"
         );
         $this->load->library('upload', $config);
         $this->load->library('image_lib'); 

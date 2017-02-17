@@ -6,7 +6,7 @@
     <meta name="description" content="Welcome to Takas-Classifieds . Premier online business directory and Classifieds. Find everything faster & easier. Buy & sell brand new and used items or search all of...">
     <meta name="keywords" content="...">
    
-    <meta name="author" content="Powered by Takas-Classifieds - Developed by www.artifectx.com">
+    <meta name="author" content="Powered by Takas-Classifieds - Developed by www.Textbookpit.com">
     <script src="https://use.fontawesome.com/fe8be35b3e.js"></script>
     <link href="<?php echo base_url();?>web_assest/css/bootstrap.css" rel="stylesheet" media="screen">
     <link href="<?php echo base_url();?>web_assest/css/czsale.css" rel="stylesheet" media="screen">
